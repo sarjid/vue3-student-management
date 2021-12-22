@@ -1,43 +1,42 @@
 <template>
   <div>
     <div class="wrapper">
-
-  <!-- Preloader -->
-  <!-- <div class="preloader flex-column justify-content-center align-items-center">
+      <!-- Preloader -->
+      <!-- <div class="preloader flex-column justify-content-center align-items-center">
     <img class="animation__shake" src="/admin/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
   </div> -->
 
-  <!-- Navbar -->
-    <nav-bar v-if="auth"></nav-bar>
-  <!-- /.navbar -->
+      <!-- Navbar -->
+      <nav-bar v-if="loggedInStatus"></nav-bar>
+      <!-- /.navbar -->
 
-  <!-- Main Sidebar Container -->
-  <side-bar v-if="auth"></side-bar>
+      <!-- Main Sidebar Container -->
+      <side-bar v-if="loggedInStatus"></side-bar>
 
-  <!-- Content Wrapper. Contains page content -->
-    <router-view></router-view>
-  <!-- /.content-wrapper -->
+      <!-- Content Wrapper. Contains page content -->
+      <router-view></router-view>
+      <!-- /.content-wrapper -->
 
-  <!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
+      <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
   </div>
+
   <!-- <router-view/> -->
 </template>
 
 <script>
-import NavBar from './components/NavBar.vue'
-import SideBar from './components/SideBar.vue'
+import NavBar from "./components/NavBar.vue";
+import SideBar from "./components/SideBar.vue";
 export default {
   components: { NavBar, SideBar },
 
-  data() {
-    return {
-        auth:false
+  computed:{
+    loggedInStatus(){
+      return this.$store.getters.GET_AUTH_STATUS;
     }
-  },
-  
-}
+  }
+};
 </script>
 
 

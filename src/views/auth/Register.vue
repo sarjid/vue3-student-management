@@ -14,7 +14,7 @@
               <input type="text" class="form-control" placeholder="name" />
               <div class="input-group-append">
                 <div class="input-group-text">
-                  <span class="fas fa-envelope"></span>
+                  <span class="fas fa-user"></span>
                 </div>
               </div>
             </div>
@@ -78,14 +78,9 @@
               <!-- /.col -->
             </div>
           </form>
-
-          <p class="mb-1">
-            <a href="forgot-password.html">I forgot my password</a>
-          </p>
           <p class="mb-0">
             <router-link :to="{name:'Login'}"  class="text-center"
               >Return to Login</router-link>
-            
           </p>
         </div>
         <!-- /.card-body -->
