@@ -43,7 +43,53 @@ export const auth = {
                 // console.log(err.response.data.errors)
             });
            })
-        }
+        },
+
+        REGISTRATION(context,regData){
+            return new Promise((resolve,reject)=>{
+                axios.post('/register',regData)
+                .then((res) => {
+                    // console.log(res.data)
+                   context.commit('SET_AUTH_TOKEN',res.data.access_token)
+                   context.commit('SET_AUTH_INFO',res.data.user)
+                    resolve(res)
+                }).catch((err) => {
+                    reject(err)
+                    // console.log(err.response.data.errors)
+                });
+               })
+        },
+
+        FORGOT(contenxt,forgotData){
+            return new Promise((resolve,reject)=>{
+                axios.post('/forgot',forgotData)
+                .then((res) => {
+                    // console.log(res.data)
+                    resolve(res)
+                }).catch((err) => {
+                    reject(err)
+                    // console.log(err.response.data.errors)
+                });
+               })
+        },
+        
+
+        LOGOUT(context){
+            axios.defaults.headers.common['Authorization'] = 'Bearer '+ context.state.auth_token;
+            return new Promise((resolve,reject)=>{
+             axios.post('/logout')
+             .then((res) => {
+                 // console.log(res.data)
+                context.commit('SET_AUTH_LOGOUT')
+                 resolve(res)
+             }).catch((err) => {
+                 reject(err)
+                 // console.log(err.response.data.errors)
+             });
+            })
+         },
+
+       
     },
     mutations: {
 
@@ -57,6 +103,17 @@ export const auth = {
             state.auth_info.email = info.email;
             state.auth_info.phone = info.phone;
             state.auth_info.image = info.image;
+        },
+
+        SET_AUTH_LOGOUT(state){
+            state.auth_token = null;
+            state.auth_status = false;
+            state.auth_info = { 
+                name: null,
+                email: null,
+                phone: null,
+                image: null,
+            }
         }
 
     },
